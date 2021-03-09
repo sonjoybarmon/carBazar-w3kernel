@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --gl-card-blur: 10px !important;
+  --gl-card-background: #c8baba12 !important;
+}
+
+._2ZlhA {
+  box-shadow: none !important;
+}
+
+.inputError {
+  color: red;
+}
+.linkStyle {
+  text-decoration: none;
+  color: #ffffff;
+}
+.linkStyle:hover {
+  text-decoration: none;
+  color: #c2c2da;
+}

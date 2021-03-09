@@ -1,0 +1,23 @@
+.menu_li{
+    margin: 0 15px;
+    line-height: 50px ;
+    font-weight: 500;
+    color:#ffffff;
+}
+.nav_li{
+    color:#ffffff;
+    font-size: 18px;
+}
+.nav_li:hover{
+    color: #909095;
+    text-decoration: none;
+    transition: all .7s ease-in-out;
+}
+.custom_menu{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+.activeText{
+    color : #909095
+}
