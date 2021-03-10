@@ -1,21 +1,21 @@
-import React from 'react';
-import MoviesSlider from '../Share/MoviesSlider/MoviesSlider';
-import NavMenu from '../Share/NavMenu/NavMenu';
-import EntertainmentMovies from '../Movies/EntertainmentMovies/EntertainmentMovies';
-import RecommendedMovies from '../Movies/RecommendedMovies/RecommendedMovies';
+import React from "react";
+import CarSlider from "../Share/CarSlider/CarSlider";
+import NavMenu from "../Share/NavMenu/NavMenu";
+import CarHistory from "../Movies/CarHistory/CarHistory";
+import DriverHistory from "../Movies/DriverHistory/DriverHistory";
 
 const Home = () => {
-    return (
-        <div>
-            <NavMenu />
-            <MoviesSlider />
-            <div style={{padding: '30px 0'}}>
-                <RecommendedMovies />
-            </div>
-            
-            <EntertainmentMovies />
-        </div>
-    );
+  return (
+    <div>
+      <NavMenu />
+      <CarSlider />
+      <div style={{ padding: "30px 0" }}>
+        <CarHistory />
+      </div>
+
+      <DriverHistory />
+    </div>
+  );
 };
 
 export default Home;

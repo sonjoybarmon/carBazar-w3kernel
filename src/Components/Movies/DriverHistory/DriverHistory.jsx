@@ -10,17 +10,17 @@ import React, { useContext } from "react";
 import CardContent from "@material-ui/core/CardContent";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { recommendMovies } from "../../../Contexts/ContextRecommended";
+import { driverInfo } from "../../../Contexts/ContextRecommended";
 
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 4,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 5,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -33,8 +33,8 @@ const responsive = {
 };
 
 const RecommendedMovies = () => {
-  const [Movies, setMovies] = useContext(recommendMovies);
-  console.log(Movies);
+  const [driver, setDriver] = useContext(driverInfo);
+  console.log(driver);
 
   return (
     <Container>
@@ -45,7 +45,7 @@ const RecommendedMovies = () => {
         xl={12}
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <Typography variant="h6">RecommendedMovies</Typography>
+        <Typography variant="h6">Driver List</Typography>
         <Button variant="contained" color="primary">
           see all
         </Button>
@@ -59,19 +59,19 @@ const RecommendedMovies = () => {
           // showDots={true}
           autoPlay={true}
         >
-          {Movies &&
-            Movies.map((el) => (
+          {driver &&
+            driver.map((el) => (
               <Card style={{ margin: "10px 5px" }}>
                 <CardMedia component="img" title="" image={el.image} />
                 <CardContent style={{ padding: "10px" }}>
-                  <Typography variant="subtitle1">{el.name}</Typography>
+                  <Typography variant="subtitle1">{el.fullName}</Typography>
                   <div style={{ display: "flex" }}>
-                    <Typography variant="body2">{el.start_time}</Typography>
-                    <span>-</span>
-                    <Typography variant="body2">{el.end_time}</Typography>
+                    {el.skill.map((el) => (
+                      <Button>{el}</Button>
+                    ))}
                   </div>
                   <Button variant="contained" color="primary" size="small">
-                    book a sit
+                    Details
                   </Button>
                 </CardContent>
               </Card>

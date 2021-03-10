@@ -4,7 +4,7 @@ import React from "react";
 const EntertainmentMovies = () => {
   return (
     <div>
-      <Typography variant="h6">EntertainmentMovies</Typography>
+      <Typography variant="h6">CarHistory</Typography>
     </div>
   );
 };
