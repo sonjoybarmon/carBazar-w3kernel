@@ -1,25 +1,103 @@
 import { Button, Container, Grid, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Card } from "ui-glassmorphism";
 import "ui-glassmorphism/dist/index.css";
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import BackButton from "../../Hoc/BackButton";
 import { UserLogin } from "../../Contexts/ContextAuth/ContextLogin";
+import firebase from "firebase/app";
+import "firebase/auth";
+import firebaseConfig from "../../Contexts/ContextAuth/firebaseConfig";
+// import firebaseConfig from "../firebaseConfig";
 
 const Login = () => {
-  const [login, setLogin, googleSignIn, FacebookLogin] = useContext(UserLogin);
-
+  const [login, setLogin] = useContext(UserLogin);
   const { register, errors, handleSubmit } = useForm();
-
   const [check, setCheck] = React.useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [user, setUser] = useState({});
+
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  if (firebase.apps.length === 0) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const googleLogIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        const { displayName, photoURL, email } = result.user;
+        const googleNewUser = {
+          name: displayName,
+          email: email,
+          photo: photoURL,
+        };
+        setLogin(googleNewUser);
+        localStorage.setItem("email", result.user.email);
+        history.replace(from);
+      })
+      .catch(function (error) {
+        const newUserInfo = { ...login };
+        newUserInfo.message = error.message;
+        setLogin(newUserInfo);
+      });
   };
+
+  const FacebookLogin = () => {
+    const fbProvider = new firebase.auth.FacebookAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(fbProvider)
+      .then(function (result) {
+        const { displayName, photoURL, email } = result.user;
+        const googleNewUser = {
+          name: displayName,
+          email: email,
+          photo: photoURL,
+        };
+        setLogin(googleNewUser);
+        localStorage.setItem("email", result.user.email);
+        history.replace(from);
+      })
+      .catch(function (error) {
+        const newUserInfo = { ...login };
+        newUserInfo.message = error.message;
+        setLogin(newUserInfo);
+      });
+  };
+  // submit form all function
+  const onSubmit = (e) => {
+    setUser(e);
+    if (user.email && user.password) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(user.email, user.password)
+        .then((res) => {
+          const newUserInfo = res.user;
+          newUserInfo.error = "";
+          newUserInfo.success = true;
+          history.replace(from);
+          setLogin(newUserInfo);
+          localStorage.setItem("email", res.user.email);
+          return newUserInfo;
+        })
+        .catch((error) => {
+          const newUserInfo = { ...user };
+          newUserInfo.message = error.message;
+          newUserInfo.success = false;
+          return newUserInfo;
+        });
+    }
+  };
+
   return (
     <div className="authBg">
       <Container>
@@ -117,7 +195,7 @@ const Login = () => {
                     variant="contained"
                     color="primary"
                     className="facebook btn"
-                    onClick={googleSignIn}
+                    onClick={googleLogIn}
                   >
                     Continue with Google
                   </Button>

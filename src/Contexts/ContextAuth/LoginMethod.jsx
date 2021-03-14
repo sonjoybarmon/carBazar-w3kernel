@@ -7,6 +7,7 @@ export const initializeLoginFramework = () => {
     firebase.initializeApp(firebaseConfig);
   }
 };
+
 export const handleGoogleSignIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider(); // firebase auth provider initialize
   return firebase
@@ -34,8 +35,13 @@ export const FbSignIn = () => {
     .auth()
     .signInWithPopup(fbProvider)
     .then(function (result) {
-      // var token = result.credential.accessToken;
-      var user = result.user;
+      const { displayName, photoURL, email } = result.user;
+      const user = {
+        isSignedIn: true,
+        name: displayName,
+        email: email,
+        photo: photoURL,
+      };
       user.success = true;
       return user;
     })

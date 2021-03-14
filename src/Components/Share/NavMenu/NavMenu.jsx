@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Nav, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import "./NavMenu.css";
 import Container from "@material-ui/core/Container";
+import { UserLogin } from "../../../Contexts/ContextAuth/ContextLogin";
 
 const NavMenu = () => {
+  const [login, setLogin, userSignOut] = useContext(UserLogin);
+
   return (
     <Navbar
       className="custom_menu"
@@ -14,7 +17,11 @@ const NavMenu = () => {
       {/* <div className='container'> */}
       <Container>
         <Navbar.Brand style={{ float: "left" }}>
-          <h2 style={{ color: "#909095" }}>CarBaZaR</h2>
+          <h2 style={{ color: "#909095" }}>
+            <Link to="/" className="linkStyle">
+              CarBaZaR
+            </Link>
+          </h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
@@ -28,22 +35,30 @@ const NavMenu = () => {
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/" className="nav_li">
+              <NavLink
+                activeClassName="activeText"
+                to="/cars"
+                className="nav_li"
+              >
                 CARS
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/" className="nav_li">
+              <NavLink activeClassName="activeText" to="/a" className="nav_li">
                 CONTACT US
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/" className="nav_li">
+              <NavLink activeClassName="activeText" to="/b" className="nav_li">
                 ABOUT
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/" className="nav_li">
+              <NavLink
+                activeClassName="activeText"
+                to="/dashboard"
+                className="nav_li"
+              >
                 DASHBOARD
               </NavLink>
             </li>
@@ -57,11 +72,15 @@ const NavMenu = () => {
               </NavLink>
             </li> */}
             <li className="menu_li">
-              <Button className="btn btn-primary">
+              {login.email || localStorage.getItem("email") ? (
+                <Button className="btn btn-primary" onClick={userSignOut}>
+                  Log out
+                </Button>
+              ) : (
                 <Link to="/login" className="linkStyle">
-                  LOGIN
+                  <Button className="btn btn-primary">Log In</Button>
                 </Link>
-              </Button>
+              )}
             </li>
           </Nav>
         </Navbar.Collapse>

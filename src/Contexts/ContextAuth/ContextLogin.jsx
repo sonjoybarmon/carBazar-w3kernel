@@ -1,17 +1,20 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-import {
-  initializeLoginFramework,
-  handleGoogleSignIn,
-  FbSignIn,
-} from "./LoginMethod";
-const axios = require("axios");
+import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/auth";
+import firebaseConfig from "./firebaseConfig";
 
+const axios = require("axios");
 export const UserLogin = createContext();
 
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const ContextLogin = ({ children }) => {
-  const [login, setLogin] = useState({});
-  const [user, setUser] = useState({
+  const [login, setLogin] = useState({
     isSignIn: false,
     name: "",
     email: "",
@@ -19,42 +22,46 @@ const ContextLogin = ({ children }) => {
     password: "",
   });
 
-  //use initializeApp firebase.
-  initializeLoginFramework();
-  let history = useHistory();
-  // let location = useLocation();
-
-  // let { from } = location.state || { from: { pathname: "/" } };
-
-  const googleSignIn = () => {
-    handleGoogleSignIn().then((res) => {
-      // setUser(res);
-      // setLogin(res);
-      console.log(res);
-    });
+  const userSignOut = () => {
+    return firebase
+      .auth()
+      .signOut()
+      .then((res) => {
+        const signOutUser = {
+          isSignedIn: false,
+          name: "",
+          photo: "",
+          email: "",
+          error: "",
+          success: false,
+        };
+        localStorage.removeItem("email");
+        window.location.reload(false);
+        return signOutUser;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  // const googleSignOut = () => {
-  //   handleSignOut().then((res) => {
-  //     handleResponse(res, true);
-  //   });
+
+  // console.log(login);
+
+  // const createUser = (payload) => {
+  //   console.log("post");
+  //   axios
+  //     .post("http://localhost:4000/driver", {
+  //       data: payload,
+  //     })
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
   // };
-  const FacebookLogin = () => {
-    FbSignIn().then((res) => {
-      handleResponse(res, false);
-    });
-  };
-  //handleResponse function
-  const handleResponse = (res, redirect) => {
-    // setUser(res);
-    // setLogin(res);
-    console.log(res);
-    if (redirect) {
-      // history.replace(from);
-    }
-  };
 
   return (
-    <UserLogin.Provider value={[login, setLogin, googleSignIn, FacebookLogin]}>
+    <UserLogin.Provider value={[login, setLogin, userSignOut]}>
       {children}
     </UserLogin.Provider>
   );

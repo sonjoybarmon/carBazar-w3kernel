@@ -1,14 +1,17 @@
 import Router from "./Router";
 import "./App.css";
 import "./App.scss";
-import ContextRecommended from "./Contexts/ContextRecommended";
+import ContextDriver from "./Contexts/ContextDriver";
 import ContextLogin from "./Contexts/ContextAuth/ContextLogin";
+import ContextCar from "./Contexts/ContextCar";
 function App() {
   return (
     <ContextLogin>
-      <ContextRecommended>
-        <Router />
-      </ContextRecommended>
+      <ContextCar>
+        <ContextDriver>
+          <Router />
+        </ContextDriver>
+      </ContextCar>
     </ContextLogin>
   );
 }

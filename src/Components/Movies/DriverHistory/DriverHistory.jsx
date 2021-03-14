@@ -10,7 +10,8 @@ import React, { useContext } from "react";
 import CardContent from "@material-ui/core/CardContent";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { driverInfo } from "../../../Contexts/ContextRecommended";
+import { driverInfo } from "../../../Contexts/ContextDriver";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,7 +33,7 @@ const responsive = {
   },
 };
 
-const RecommendedMovies = () => {
+const DriverHistory = () => {
   const [driver, setDriver] = useContext(driverInfo);
   console.log(driver);
 
@@ -43,7 +44,11 @@ const RecommendedMovies = () => {
         item
         md={12}
         xl={12}
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "15px 0",
+        }}
       >
         <Typography variant="h6">Driver List</Typography>
         <Button variant="contained" color="primary">
@@ -61,17 +66,39 @@ const RecommendedMovies = () => {
         >
           {driver &&
             driver.map((el) => (
-              <Card style={{ margin: "10px 5px" }}>
-                <CardMedia component="img" title="" image={el.image} />
-                <CardContent style={{ padding: "10px" }}>
+              <Card key={el._id} style={{ margin: "10px 5px" }}>
+                <CardMedia
+                  component="img"
+                  height="150"
+                  title=""
+                  image={el.image}
+                />
+                <CardContent style={{ padding: "30px 10px" }}>
                   <Typography variant="subtitle1">{el.fullName}</Typography>
                   <div style={{ display: "flex" }}>
-                    {el.skill.map((el) => (
-                      <Button>{el}</Button>
-                    ))}
+                    {el.skill &&
+                      el.skill.map((el) => (
+                        <Button
+                          disabled
+                          variant="outlined"
+                          size="small"
+                          color="primary"
+                          style={{ color: "#000", margin: "3px" }}
+                        >
+                          {el}
+                        </Button>
+                      ))}
                   </div>
-                  <Button variant="contained" color="primary" size="small">
-                    Details
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    // disabled
+                    size="small"
+                    style={{ color: "#fff", marginTop: "15px" }}
+                  >
+                    <Link to={`/driver/${el._id}`} className="linkStyle">
+                      Details
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -82,4 +109,4 @@ const RecommendedMovies = () => {
   );
 };
 
-export default RecommendedMovies;
+export default DriverHistory;
