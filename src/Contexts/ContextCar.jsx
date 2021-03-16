@@ -7,7 +7,7 @@ const ContextCar = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/car")
+      .get("https://safe-bastion-79755.herokuapp.com/car")
       .then((res) => {
         setCar(res.data);
       })

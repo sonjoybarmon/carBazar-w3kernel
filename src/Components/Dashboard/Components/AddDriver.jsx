@@ -24,7 +24,7 @@ const AddDriver = () => {
   const password = useRef({});
   password.current = watch("password", "");
   const onSubmit = (data) => {
-    fetch("http://localhost:4000/driver", {
+    fetch("https://safe-bastion-79755.herokuapp.com/driver", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const AddDriver = () => {
         }
       });
     // axios
-    //   .post("http://localhost:4000/driver", {
+    //   .post("https://safe-bastion-79755.herokuapp.com/driver", {
     //     driver,
     //   })
     //   .then(function (response) {

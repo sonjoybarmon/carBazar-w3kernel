@@ -9,7 +9,7 @@ const DriverDetails = () => {
   const [details, setDetails] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/driver/${_id}`)
+      .get(`https://safe-bastion-79755.herokuapp.com/driver/${_id}`)
       .then((res) => setDetails(res.data))
       .then((err) => console.log(err));
   }, []);

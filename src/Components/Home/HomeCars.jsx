@@ -19,10 +19,10 @@ const HomeCars = () => {
     <div>
       <NavMenu />
       <Container style={{ padding: "10px 0" }}>
-        <Grid container item md={12} spacing={2}>
+        <Grid container item md={12} spacing={3}>
           {car &&
             car.map((el) => (
-              <Grid key={el._id} item md={4}>
+              <Grid key={el._id} item md={4} sm={6} xs={12}>
                 <Link to={`/details/${el._id}`} className="linkStyle">
                   <Card>
                     <CardMedia

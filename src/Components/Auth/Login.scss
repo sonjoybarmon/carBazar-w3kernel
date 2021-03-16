@@ -1,4 +1,5 @@
-$backgroundColor: #0d082a;
+// $backgroundColor: #0d082a;
+$backgroundColor: #212529;
 $whiteColor: #ffffff;
 .authBg {
   background-color: $backgroundColor;
@@ -6,6 +7,10 @@ $whiteColor: #ffffff;
   height: 100vh;
   padding: 30px;
   color: $whiteColor;
+  @media screen and (max-width: 620px) {
+    height: 112vh !important;
+    padding: 10px !important;
+  }
   .login__Wrapper {
     // max-width: 600px;
     // height: 400px;
@@ -37,6 +42,23 @@ $whiteColor: #ffffff;
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+      }
+    }
+  }
+  .facebook__Google {
+    .ButtonSection {
+      .google {
+        margin: 5px 0;
+        @media screen and (max-width: 620px) {
+          width: 100% !important;
+        }
+      }
+      .facebook {
+        margin: 5px 0;
+        @media screen and (max-width: 620px) {
+          width: 100% !important;
+          margin: 10px 0 !important;
+        }
       }
     }
   }

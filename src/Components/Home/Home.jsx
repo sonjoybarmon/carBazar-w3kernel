@@ -7,6 +7,7 @@ import Footer from "../Share/Footer/Footer";
 import UpdateCars from "../Movies/UpdateCars/UpdateCars";
 import HotCars from "../Movies/HotCoars/HotCars";
 import ComingCar from "../Movies/ComingCar/ComingCar";
+import { Container } from "@material-ui/core";
 
 const Home = () => {
   return (
@@ -19,7 +20,10 @@ const Home = () => {
 
       <DriverHistory />
       <ComingCar />
-      <UpdateCars />
+      <Container>
+        <UpdateCars />
+      </Container>
+
       <HotCars />
       <Footer />
     </div>

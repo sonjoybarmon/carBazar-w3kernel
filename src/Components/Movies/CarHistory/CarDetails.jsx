@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../Share/Footer/Footer";
 import NavMenu from "../../Share/NavMenu/NavMenu";
@@ -14,7 +14,7 @@ const CarDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/details/${_id}`)
+      .get(`https://safe-bastion-79755.herokuapp.com/details/${_id}`)
       .then((res) => setDetails(res.data))
       .then((err) => console.log(err));
   }, []);
@@ -54,7 +54,9 @@ const CarDetails = () => {
               }}
             >
               <Button variant="contained" color="primary">
-                Buy Car
+                <Link to={`/addCard`} className="linkStyle">
+                  Buy Car
+                </Link>
               </Button>
             </div>
           </div>

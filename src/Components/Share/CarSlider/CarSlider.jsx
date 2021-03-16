@@ -30,7 +30,7 @@ const MoviesSlider = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/slide")
+      .get("https://safe-bastion-79755.herokuapp.com/slide")
       .then((res) => {
         setSlide(res.data);
       })

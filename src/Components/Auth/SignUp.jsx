@@ -12,10 +12,19 @@ import BackButton from "../../Hoc/BackButton";
 
 const SignUp = () => {
   const [login, setLogin, createUser] = useContext(UserLogin);
-  const [newUser, setNewUser] = useState({});
+
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const { register, errors, handleSubmit, watch } = useForm();
-  const password = useRef({});
-  password.current = watch("password", "");
+  // const password = useRef({});
+  // password.current = watch("password", "");
+
+  const handleChange = (prop) => (event) => {
+    setNewUser({ ...newUser, [prop]: event.target.value });
+  };
 
   let history = useHistory();
   let location = useLocation();
@@ -25,8 +34,7 @@ const SignUp = () => {
   }
 
   const onSubmit = (data) => {
-    setNewUser(data);
-
+    // setNewUser(data);
     if (newUser.email && newUser.password) {
       firebase
         .auth()
@@ -37,6 +45,7 @@ const SignUp = () => {
           newUserInfo.success = true;
           history.replace(from);
           localStorage.setItem("email", res.user.email);
+          localStorage.setItem("name", res.newUser.name);
           setLogin(newUserInfo);
         })
         .catch(function (error) {
@@ -46,6 +55,27 @@ const SignUp = () => {
           setLogin(newUserInfo);
         });
     }
+
+    // if (newUser.email && newUser.password) {
+    //   firebase
+    //     .auth()
+    //     .createUserWithEmailAndPassword(newUser.email, newUser.password)
+    //     .then((res) => {
+    //       const newUserInfo = res.user;
+    //       newUserInfo.error = "";
+    //       newUserInfo.success = true;
+    //       history.replace(from);
+    //       localStorage.setItem("email", res.user.email);
+    //       localStorage.setItem("name", res.newUser.name);
+    //       setLogin(newUserInfo);
+    //     })
+    //     .catch(function (error) {
+    //       const newUserInfo = { ...newUser };
+    //       newUserInfo.message = error.message;
+    //       newUserInfo.success = false;
+    //       setLogin(newUserInfo);
+    //     });
+    // }
 
     // console.log(data);
   };
@@ -61,34 +91,14 @@ const SignUp = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant="h6">Sign up</Typography>
                 <div className="input_Wrapper">
-                  {/* <Typography variant="subtitle1">First Name</Typography>
-                  <input
-                    name="Fname"
-                    ref={register({ required: true })}
-                    className="authInput"
-                    placeholder="Enter Your First Name"
-                  />
-                  <Typography variant="caption" className="inputError">
-                    {errors.Fname && "First name is required"}
-                  </Typography>
-
-                  <Typography variant="subtitle1">Last Name</Typography>
-                  <input
-                    name="Lname"
-                    ref={register({ required: true })}
-                    className="authInput"
-                    placeholder="Enter Your Last Name"
-                  />
-                  <Typography variant="caption" className="inputError">
-                    {errors.Lname && "Last name is required"}
-                  </Typography> */}
-
                   <Typography variant="subtitle1">Full Name</Typography>
                   <input
                     name="name"
                     ref={register({ required: true })}
                     className="authInput"
                     placeholder="Enter Your full Name"
+                    value={newUser.name}
+                    onChange={handleChange("name")}
                   />
                   <Typography variant="caption" className="inputError">
                     {errors.name && "full name is required"}
@@ -100,6 +110,8 @@ const SignUp = () => {
                     ref={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
                     className="authInput"
                     placeholder="Enter Your Email"
+                    value={newUser.email}
+                    onChange={handleChange("email")}
                   />
                   <Typography variant="caption" className="inputError">
                     {errors.email && "Please Enter a valid email"}
@@ -112,15 +124,20 @@ const SignUp = () => {
                     ref={register({ required: true, minLength: 8 })}
                     className="authInput"
                     placeholder="Enter Your Password"
+                    value={newUser.password}
+                    onChange={handleChange("password")}
+                    // onChange={(e) =>
+                    //   setNewUser({ ...newUser, password: e.target.value })
+                    // }
                   />
                   <Typography variant="caption" className="inputError">
-                    {errors.password && "Please Enter maximun 8 number"}
+                    {errors.password && "Please Enter minimum 8 number"}
                   </Typography>
 
-                  <Typography variant="subtitle1">Conform Password</Typography>
+                  {/* <Typography variant="subtitle1">Conform Password</Typography>
                   <input
                     name="ConformPassword"
-                    type="password"
+                    // type="password"
                     ref={register({
                       validate: (value) =>
                         value === password.current ||
@@ -128,10 +145,12 @@ const SignUp = () => {
                     })}
                     className="authInput"
                     placeholder="Enter Your Conform Password"
+                    // value={newUser.ConformPassword}
+                    // onChange={handleChange("ConformPassword")}
                   />
                   <Typography variant="caption" className="inputError">
                     {errors.ConformPassword && "Don't match password"}
-                  </Typography>
+                  </Typography> */}
                 </div>
                 <Button
                   variant="contained"

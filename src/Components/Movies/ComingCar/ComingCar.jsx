@@ -34,7 +34,7 @@ const ComingCar = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/coming`)
+      .get(`https://safe-bastion-79755.herokuapp.com/coming`)
       .then((res) => setData(res.data))
       .then((err) => console.log(err));
   }, []);

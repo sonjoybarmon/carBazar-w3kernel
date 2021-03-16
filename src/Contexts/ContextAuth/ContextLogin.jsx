@@ -44,12 +44,25 @@ const ContextLogin = ({ children }) => {
       });
   };
 
+  const forgotPassword = (Email) => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(Email)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log("okkkkkkkkk");
+  };
+
   // console.log(login);
 
   // const createUser = (payload) => {
   //   console.log("post");
   //   axios
-  //     .post("http://localhost:4000/driver", {
+  //     .post("https://safe-bastion-79755.herokuapp.com/driver", {
   //       data: payload,
   //     })
   //     .then(function (response) {
@@ -61,7 +74,7 @@ const ContextLogin = ({ children }) => {
   // };
 
   return (
-    <UserLogin.Provider value={[login, setLogin, userSignOut]}>
+    <UserLogin.Provider value={[login, setLogin, userSignOut, forgotPassword]}>
       {children}
     </UserLogin.Provider>
   );

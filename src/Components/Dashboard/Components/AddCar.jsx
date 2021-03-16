@@ -7,6 +7,8 @@ import BackButton from "../../../Hoc/BackButton";
 import "../Dashboard.scss";
 
 const AddCar = () => {
+  const history = useHistory();
+  const location = useLocation();
   const [car, setCar] = useState({
     name: "",
     modal: "",
@@ -42,7 +44,7 @@ const AddCar = () => {
   password.current = watch("password", "");
 
   const onSubmit = (data) => {
-    fetch("http://localhost:4000/car", {
+    fetch("https://safe-bastion-79755.herokuapp.com/car", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +54,7 @@ const AddCar = () => {
       .then((res) => res.json())
       .then((success) => {
         if (success) {
+          location.push("/cars");
           alert("your car create successful");
         }
       });

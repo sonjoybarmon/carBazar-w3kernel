@@ -17,7 +17,7 @@ const UpdateCars = () => {
         </Grid>
 
         <Grid container item md={12} spacing={2} style={{ marginTop: "15px" }}>
-          <Grid item md={3}>
+          <Grid item md={3} sm={6} xs={6}>
             {db1 &&
               db1.map((el) => (
                 <div>
@@ -27,7 +27,7 @@ const UpdateCars = () => {
                 </div>
               ))}
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={3} sm={6} xs={6}>
             {db1 &&
               db2.map((el) => (
                 <div>
@@ -37,7 +37,7 @@ const UpdateCars = () => {
                 </div>
               ))}
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={3} sm={6} xs={6}>
             {db1 &&
               db3.map((el) => (
                 <div>
@@ -47,7 +47,7 @@ const UpdateCars = () => {
                 </div>
               ))}
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={3} sm={6} xs={6}>
             {db1 &&
               db4.map((el) => (
                 <div>

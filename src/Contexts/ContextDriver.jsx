@@ -7,7 +7,7 @@ const ContextRecommended = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/driver")
+      .get("https://safe-bastion-79755.herokuapp.com/driver")
       .then((res) => {
         setDriver(res.data);
       })

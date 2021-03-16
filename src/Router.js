@@ -9,6 +9,8 @@ import PrivateRoute from "./Components/Auth/PrivateRoute/PrivateRoute.jsx";
 import Dashboard from "./Components/Dashboard/Deshboard";
 import HomeCars from "./Components/Home/HomeCars";
 import DriverDetails from "./Components/Movies/DriverHistory/DriverDetails";
+import CheckOut from "./Components/CheckOut/CheckOut";
+import ContactUs from "./Components/ContactUs/ContactUs";
 
 export default function Routes() {
   return (
@@ -25,6 +27,11 @@ export default function Routes() {
         {/* <Route exact path="/details/:_id" component={CarDetails} />
         <Route exact path="/driver/:_id" component={DriverDetails} /> */}
         <Route exact path="/cars" component={HomeCars} />
+
+        {/* <Route exact path="car/:_id/checkout" component={CheckOut} /> */}
+        {/* <Route exact path="checkout/:_id" component={CheckOut} /> */}
+        <Route exact path="/addCard" component={CheckOut} />
+        <Route exact path="/contact" component={ContactUs} />
 
         <PrivateRoute exact path="/details/:_id">
           <CarDetails />

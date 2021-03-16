@@ -18,7 +18,7 @@ const Cars = () => {
       <Grid container item md={12} spacing={2}>
         {car &&
           car.map((el) => (
-            <Grid key={el._id} item md={6}>
+            <Grid key={el._id} item md={6} sm={12}>
               <Link to={`/details/${el._id}`}>
                 <Card>
                   <CardMedia

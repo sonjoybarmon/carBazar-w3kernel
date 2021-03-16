@@ -21,6 +21,10 @@ const Login = () => {
 
   const [user, setUser] = useState({});
 
+  const handleChange = (prop) => (event) => {
+    setUser({ ...user, [prop]: event.target.value });
+  };
+
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
@@ -73,9 +77,9 @@ const Login = () => {
         setLogin(newUserInfo);
       });
   };
+
   // submit form all function
   const onSubmit = (e) => {
-    setUser(e);
     if (user.email && user.password) {
       firebase
         .auth()
@@ -108,7 +112,7 @@ const Login = () => {
           style={{ display: "flex", justifyContent: "center" }}
         >
           {/* <Grid md={3} item></Grid> */}
-          <Grid md={6} sm={10} xs={12} item>
+          <Grid md={6} sm={12} xs={12} item>
             <Card className="login__Wrapper" style={{ position: "relative" }}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant="h6">Sign In</Typography>
@@ -119,6 +123,8 @@ const Login = () => {
                     ref={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
                     className="authInput"
                     placeholder="Enter Your Email"
+                    value={user.email}
+                    onChange={handleChange("email")}
                   />
                   <Typography variant="caption" className="inputError">
                     {errors.email && "Please Enter a valid email"}
@@ -127,9 +133,12 @@ const Login = () => {
                   <Typography variant="subtitle1">Password</Typography>
                   <input
                     name="password"
+                    type="password"
                     ref={register({ required: true, minLength: 8 })}
                     className="authInput"
                     placeholder="Enter Your Password"
+                    value={user.password}
+                    onChange={handleChange("password")}
                   />
                   <Typography variant="caption" className="inputError">
                     {errors.password && "Please Enter maximun 8 number"}
@@ -173,6 +182,11 @@ const Login = () => {
                     SignUp
                   </Link>
                 </Typography>
+                <Typography variant="body2">
+                  <Link to="ChangePassword" className="linkStyle">
+                    Change Password
+                  </Link>
+                </Typography>
                 {/* <input type="submit"/> */}
               </form>
 
@@ -190,7 +204,7 @@ const Login = () => {
                   >
                     Continue with Facebook
                   </Button>
-                  <br />
+                  {/* <br /> */}
                   <Button
                     variant="contained"
                     color="primary"

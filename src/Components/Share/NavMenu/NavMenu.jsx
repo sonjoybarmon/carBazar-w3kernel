@@ -44,13 +44,21 @@ const NavMenu = () => {
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/a" className="nav_li">
+              <NavLink
+                activeClassName="activeText"
+                to="/contact"
+                className="nav_li"
+              >
                 CONTACT US
               </NavLink>
             </li>
             <li className="menu_li">
-              <NavLink activeClassName="activeText" to="/b" className="nav_li">
-                ABOUT
+              <NavLink
+                activeClassName="activeText"
+                to="/addCard"
+                className="nav_li"
+              >
+                ADD CARD
               </NavLink>
             </li>
             <li className="menu_li">

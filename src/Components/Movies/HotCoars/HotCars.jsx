@@ -14,7 +14,7 @@ const HotCars = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/hotCars`)
+      .get(`https://safe-bastion-79755.herokuapp.com/hotCars`)
       .then((res) => setData(res.data))
       .then((err) => console.log(err));
   }, []);
@@ -32,7 +32,7 @@ const HotCars = () => {
       <Grid container item md={12} spacing={3}>
         {data &&
           data.map((el) => (
-            <Grid item md={3} key={el.id}>
+            <Grid item md={3} sm={4} xs={6} key={el.id}>
               <Card className="hotCars">
                 <CardMedia
                   component="img"
