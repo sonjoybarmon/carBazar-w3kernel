@@ -48,7 +48,7 @@ const CarInformation = () => {
           margin: "15px 0",
         }}
       >
-        <Typography variant="h6">Driver List</Typography>
+        <Typography variant="h6">Car List</Typography>
         <Button variant="contained" color="primary">
           <Link to="/cars" className="linkStyle">
             see all

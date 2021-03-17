@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ChangePassword from "./Components/Auth/ChangePassword";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Login from "./Components/Auth/Login";
@@ -55,7 +55,9 @@ export default function Routes() {
               height: "100vh",
             }}
           >
-            <h1 style={{ color: "red" }}>page is not found</h1>
+            <h1 style={{ color: "red" }}>
+              page is not found !<Link to="/">go home</Link>
+            </h1>
           </div>
         </Route>
       </Switch>

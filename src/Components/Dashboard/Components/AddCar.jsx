@@ -54,11 +54,9 @@ const AddCar = () => {
       .then((res) => res.json())
       .then((success) => {
         if (success) {
-          location.push("/cars");
           alert("your car create successful");
         }
       });
-
     setCar({
       name: "",
       modal: "",
