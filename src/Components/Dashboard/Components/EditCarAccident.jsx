@@ -31,7 +31,7 @@ export default function EditCarAccident({ btnText, id }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/accident/${id}`)
+      .get(`https://safe-bastion-79755.herokuapp.com/accident/${id}`)
       .then((res) => {
         setCar(res.data);
       })
@@ -49,7 +49,7 @@ export default function EditCarAccident({ btnText, id }) {
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:4000/accident/${id}`, {
+    fetch(`https://safe-bastion-79755.herokuapp.com/accident/${id}`, {
       method: "PATCH",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(car),

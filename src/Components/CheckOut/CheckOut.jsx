@@ -12,7 +12,7 @@ const CheckOut = () => {
   // https://safe-bastion-79755.herokuapp.com/
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/car/${_id}/checkout`)
+      .get(`https://safe-bastion-79755.herokuapp.com/car/${_id}/checkout`)
       .then((res) => setDetails(res.data))
       .then((err) => console.log(err));
   }, []);

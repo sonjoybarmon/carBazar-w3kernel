@@ -17,7 +17,7 @@ const CarAccident = () => {
   const [car, setCar] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/accident")
+      .get("https://safe-bastion-79755.herokuapp.com/accident")
       .then((res) => {
         setCar(res.data);
       })

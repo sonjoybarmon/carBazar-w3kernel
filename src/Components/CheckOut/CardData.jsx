@@ -5,7 +5,7 @@ const CardData = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     axios
-      .get("http://localhost:4000/card")
+      .get("https://safe-bastion-79755.herokuapp.com/card")
       .then((res) => {
         setData(res.data);
       })

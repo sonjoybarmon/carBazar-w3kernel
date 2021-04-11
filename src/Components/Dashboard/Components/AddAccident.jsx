@@ -57,7 +57,7 @@ export default function AddAccident({ btnText, id }) {
     formData.append("name", car.name);
     formData.append("data", car.data);
     formData.append("cost", car.cost);
-    fetch("http://localhost:4000/accident/", {
+    fetch("https://safe-bastion-79755.herokuapp.com/accident/", {
       method: "POST",
       body: formData,
     })
@@ -69,7 +69,7 @@ export default function AddAccident({ btnText, id }) {
         console.error(error);
       });
 
-    // fetch(`http://localhost:4000/accident`, {
+    // fetch(`https://safe-bastion-79755.herokuapp.com/accident`, {
     //   method: "POST",
     //   // headers: { "content-Type": "application/json" },
     //   body: formData,
