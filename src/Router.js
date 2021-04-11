@@ -11,8 +11,16 @@ import HomeCars from "./Components/Home/HomeCars";
 import DriverDetails from "./Components/Movies/DriverHistory/DriverDetails";
 import CheckOut from "./Components/CheckOut/CheckOut";
 import ContactUs from "./Components/ContactUs/ContactUs";
+import Demo from "./Demo";
+import NotFount from "./Components/Share/NotFound/NotFount";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 export default function Routes() {
+  useEffect(() => {
+    ReactGA.initialize("G-708QR0DB28");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <Router>
       <Switch>
@@ -23,13 +31,7 @@ export default function Routes() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/forgotPassword" component={ForgotPassword} />
         <Route exact path="/changePassword" component={ChangePassword} />
-
-        {/* <Route exact path="/details/:_id" component={CarDetails} />
-        <Route exact path="/driver/:_id" component={DriverDetails} /> */}
         <Route exact path="/cars" component={HomeCars} />
-
-        {/* <Route exact path="car/:_id/checkout" component={CheckOut} /> */}
-        {/* <Route exact path="checkout/:_id" component={CheckOut} /> */}
         <Route exact path="/addCard" component={CheckOut} />
         <Route exact path="/contact" component={ContactUs} />
 
@@ -39,27 +41,13 @@ export default function Routes() {
         <PrivateRoute exact path="/driver/:_id">
           <DriverDetails />
         </PrivateRoute>
-
-        {/* <Route exact path="/dashboard" component={Dashboard} /> */}
         <PrivateRoute exact path="/dashboard">
           <Dashboard />
         </PrivateRoute>
 
-        <Route path="*">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: "100vh",
-            }}
-          >
-            <h1 style={{ color: "red" }}>
-              page is not found !<Link to="/">go home</Link>
-            </h1>
-          </div>
-        </Route>
+        <Route path="/demo" component={Demo} />
+
+        <Route path="*" component={NotFount} />
       </Switch>
     </Router>
   );

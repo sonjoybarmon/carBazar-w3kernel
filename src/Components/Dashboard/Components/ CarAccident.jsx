@@ -5,19 +5,40 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Button,
 } from "@material-ui/core";
-import React, { useContext } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { carInfo } from "../../../Contexts/ContextCar";
-
+import EditIcon from "@material-ui/icons/Edit";
+import EditCarAccident from "./EditCarAccident";
+import AddAccident from "./AddAccident";
 const CarAccident = () => {
-  const [car] = useContext(carInfo);
-  console.log(car && car);
+  const [car, setCar] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/accident")
+      .then((res) => {
+        setCar(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
       <Grid container item md={12} spacing={2}>
+        <Grid
+          item
+          md={12}
+          style={{ display: "flex", justifyContent: "flex-end" }}
+        >
+          <AddAccident btnText={"Add Accident"} />
+        </Grid>
         {car &&
           car.map((el) => (
-            <Grid key={el._id} item md={6}>
+            <Grid key={el._id} item md={6} style={{ position: "relative" }}>
               <Card>
                 <CardMedia
                   component="img"
@@ -31,24 +52,42 @@ const CarAccident = () => {
                   </Typography>
                   <Grid container item md={12}>
                     <Grid item md={6}>
-                      {el.accident &&
-                        el.accident.carAccident[0] &&
-                        el.accident.carAccident[0].date &&
-                        el.accident.carAccident[0].date.map((el) => (
-                          <p>Date : {el}</p>
-                        ))}
+                      {/* {el.cost &&
+                        el.cost &&
+                        el.cost.map((el) => <p>Date : {el.data}</p>)} */}
+                      <p>Date : {el.data}</p>
                     </Grid>
                     <Grid item md={6}>
-                      {el.fullMonth &&
-                        el.fullMonth.cost[0] &&
-                        el.fullMonth.cost[0].accident &&
-                        el.fullMonth.cost[0].accident.map((el) => (
-                          <p>Cost : {el}</p>
-                        ))}
+                      {/* {el.cost &&
+                        el.cost &&
+                        el.cost.map((el) => <p>Cost : {el.cost}</p>)} */}
+                      <p>Cost : {el.cost}</p>
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  right: "15px",
+                  zIndex: "99999",
+                }}
+              >
+                <EditCarAccident
+                  // handleEdit={() => handleEdit(el._id)}
+                  id={el._id}
+                  btnText={<EditIcon />}
+                />
+                {/* <Button
+                  onClick={handleEdit(el._id)}
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                >
+                  <EditIcon />
+                </Button> */}
+              </div>
             </Grid>
           ))}
       </Grid>

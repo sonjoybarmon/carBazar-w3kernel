@@ -216,15 +216,21 @@ const Login = () => {
                 </div>
               </div>
 
-              <div
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
                 style={{
                   position: "absolute",
                   top: "10px ",
                   right: "10px",
                 }}
               >
-                <BackButton style={{ color: "#fff" }} />
-              </div>
+                {/* <BackButton style={{ color: "#fff" }} /> */}
+                <Link to="/" className="linkStyle">
+                  Home
+                </Link>
+              </Button>
             </Card>
           </Grid>
         </Grid>

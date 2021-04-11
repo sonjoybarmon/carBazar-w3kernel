@@ -158,7 +158,7 @@ const SignUp = () => {
                   type="submit"
                   className="signUpButton"
                 >
-                  Sign In
+                  Sign Up
                 </Button>
               </form>
               <Typography variant="subtitle2">
@@ -168,15 +168,21 @@ const SignUp = () => {
                 </Link>
               </Typography>
 
-              <div
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
                 style={{
                   position: "absolute",
                   top: "10px ",
                   right: "10px",
                 }}
               >
-                <BackButton style={{ color: "#fff" }} />
-              </div>
+                <Link to="/" className="linkStyle">
+                  Home
+                </Link>
+                {/* <BackButton style={{ color: "#fff" }} /> */}
+              </Button>
             </Card>
           </Grid>
         </Grid>
